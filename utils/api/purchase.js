@@ -57,7 +57,8 @@ export async function handlePurchase(req, res) {
   try {
     await fs.appendFile(LOG_FILE, logLine);
     transactionEvents.emit("new-transaction", logLine);
-  } catch {
+  } catch (error) {
+    console.error("Failed to record transaction.", error);
     sendResponse(
       res,
       500,

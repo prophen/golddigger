@@ -45,16 +45,33 @@ form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
   const amount = Number(document.querySelector("#investment-amount").value);
+  if (!Number.isFinite(amount) || amount <= 0) {
+    summary.textContent = "Enter a valid amount to invest.";
+    dialog.showModal();
+    return;
+  }
 
-  const response = await fetch("/api/purchase", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ amount }),
-  });
-  const result = await response.json();
+  try {
+    const response = await fetch("/api/purchase", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ amount }),
+    });
+    const result = await response.json();
 
-  summary.textContent = `You just bought ${result.ounces} ounces (ozt) for £${result.total}. You will receive documentation shortly.`;
-  dialog.showModal();
+    if (!response.ok) {
+      summary.textContent =
+        result?.error || "Purchase failed. Please try again.";
+      dialog.showModal();
+      return;
+    }
+
+    summary.textContent = `You just bought ${result.ounces} ounces (ozt) for £${result.total}. You will receive documentation shortly.`;
+    dialog.showModal();
+  } catch {
+    summary.textContent = "Network error. Please try again.";
+    dialog.showModal();
+  }
 });
 
 closeBtn.addEventListener("click", () => {
