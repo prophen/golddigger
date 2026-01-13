@@ -1,0 +1,15 @@
+{
+  "name": "golddigger",
+  "version": "1.0.0",
+  "description": "an app to track gold prices and buy gold",
+  "license": "ISC",
+  "author": "Nikema Prophet",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
