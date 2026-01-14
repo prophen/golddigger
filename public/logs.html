@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="GoldDigger logs - track live purchases and transaction activity.">
+    <link rel="stylesheet" href="/logs.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Saira+Stencil+One&display=swap"
+      rel="stylesheet">
+    <title>Transaction Logs | GoldDigger</title>
+</head>
+<body>
+    <main class="shell">
+        <header class="hero">
+            <div class="hero-text">
+                <p class="eyebrow">GoldDigger Ops</p>
+                <h1 class="title">Transaction Logs</h1>
+                <p class="subtitle">A live stream of every purchase, from daily digs to big strikes.</p>
+            </div>
+            <div class="hero-panel">
+                <div class="stat">
+                    <span class="stat-label">Total Entries</span>
+                    <span class="stat-value" data-total>--</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Total Volume</span>
+                    <span class="stat-value" data-volume>--</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Last Update</span>
+                    <span class="stat-value" data-last>--</span>
+                </div>
+                <div class="stat status">
+                    <span class="stat-label">Stream</span>
+                    <span class="stat-value" data-status>Connecting</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="controls">
+            <label class="search">
+                <span>Filter logs</span>
+                <input id="filter-input" type="search" placeholder="Search by amount, time, or price">
+            </label>
+            <button id="refresh-btn" class="refresh-btn" type="button">Refresh</button>
+        </section>
+
+        <section class="log-table">
+            <div class="table-head">
+                <span>Timestamp</span>
+                <span>Amount</span>
+                <span>Price / Oz</span>
+                <span>Gold Sold</span>
+            </div>
+            <div id="log-rows" class="table-body"></div>
+        </section>
+
+        <p id="empty-state" class="empty-state" hidden>No transactions yet.</p>
+        <p id="error-state" class="error-state" hidden>Unable to load logs. Try again.</p>
+    </main>
+    <script type="module" src="/logs.js"></script>
+</body>
+</html>

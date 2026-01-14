@@ -7,10 +7,13 @@ export async function serveStatic(req, res, baseDir) {
   const publicDir = path.join(baseDir, "public");
   const requestUrl = new URL(req.url, `http://${req.headers.host}`);
   const pathname = requestUrl.pathname;
-  const filePath = path.join(
-    publicDir,
-    pathname === "/" ? "index.html" : pathname
-  );
+  const normalizedPath = pathname === "/" ? "index.html" : pathname;
+  const cleanedPath = normalizedPath.replace(/^\/+/, "");
+  const resolvedPath =
+    cleanedPath === "logs" || cleanedPath === "logs/"
+      ? "logs.html"
+      : cleanedPath;
+  const filePath = path.join(publicDir, resolvedPath);
 
   const ext = path.extname(filePath);
 

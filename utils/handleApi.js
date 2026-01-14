@@ -1,6 +1,8 @@
 import { handlePriceStream } from "./api/priceStream.js";
 import { handlePrice } from "./api/price.js";
 import { handlePurchase } from "./api/purchase.js";
+import { handleLogs } from "./api/logs.js";
+import { handleLogsStream } from "./api/logsStream.js";
 import { handleNotFound } from "./api/notFound.js";
 
 export async function handleApi(req, res) {
@@ -17,6 +19,16 @@ export async function handleApi(req, res) {
 
   if (requestUrl.pathname === "/api/purchase" && req.method === "POST") {
     await handlePurchase(req, res);
+    return true;
+  }
+
+  if (requestUrl.pathname === "/api/logs" && req.method === "GET") {
+    await handleLogs(req, res);
+    return true;
+  }
+
+  if (requestUrl.pathname === "/api/logs-stream" && req.method === "GET") {
+    handleLogsStream(req, res);
     return true;
   }
 
