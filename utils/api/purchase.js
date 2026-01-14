@@ -55,6 +55,7 @@ export async function handlePurchase(req, res) {
   )}, gold sold: ${ounces} Oz\n`;
 
   try {
+    await fs.mkdir(path.dirname(LOG_FILE), { recursive: true });
     await fs.appendFile(LOG_FILE, logLine);
     transactionEvents.emit("new-transaction", logLine);
   } catch (error) {
